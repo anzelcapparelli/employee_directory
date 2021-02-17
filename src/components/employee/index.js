@@ -9,15 +9,19 @@ function EmployeeCard() {
     const [empList, setList] = useState([]);
     // const [error, setError] = useState("");
 
-
-    // 
-    useEffect(() => {
-        API.search()
+    API.search()
         .then((res) => {
             console.log(res);
             setList(res.data.results);
         })
-          
+
+    useEffect(() => {
+        API.search()
+            .then((res) => {
+                // console.log(res);
+                setList(res.data.results);
+            })
+
     }, []);
 
     return (
@@ -30,20 +34,23 @@ function EmployeeCard() {
                 <th>Cell</th>
             </tr>
 
-            <tr>
+            {/* <tr>
                 <td>
                     <img
                         alt="placeholder"
                         src={empList[0].picture.thumbnail}
                     />
                 </td>
-                <td>{empList[0].name.first}</td>
+                <td>{empList[0].name.first} {empList[0].name.last}</td>
                 <td>{empList[0].email}</td>
                 <td>{empList[0].phone}</td>
                 <td>{empList[0].cell}</td>
-            </tr>
+            </tr> */}
         </table>
     )
+
+
+
 }
 
 
