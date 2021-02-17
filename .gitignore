@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+repeat_add_ref.js
+repeat_add_ref2.js
+
 # dependencies
 /node_modules
 /.pnp
