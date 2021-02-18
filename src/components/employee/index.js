@@ -33,7 +33,20 @@ function EmployeeTable() {
 
     }, [empFilter]);
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     const updatefilter = filterList.sort(function (a, b) {
+    //         var x = a.email.toLowerCase();
+    //         var y = b.email.toLowerCase();
+    //         if (x < y) { return -1; }
+    //         if (x > y) { return 1; }
+    //         return 0;
+    //     });
+    //     setFilterList(updatefilter);
+    // }, [filterList]);
+
+    const handleInputChange = (event) => setFilter(event.target.value);
+
+    const handleSortChange = (event) => {
         const updatefilter = filterList.sort(function (a, b) {
             var x = a.email.toLowerCase();
             var y = b.email.toLowerCase();
@@ -41,12 +54,9 @@ function EmployeeTable() {
             if (x > y) { return 1; }
             return 0;
         });
-        setFilterList(updatefilter)
-    }, [filterList]);
-
-    const handleInputChange = (event) => setFilter(event.target.value);
-
-    // const handleSortChange = (event) => setFilter(event.target.value);
+        setFilterList(updatefilter);
+        console.log(filterList);
+    };
     // clicking a header needs to sort by that column
     // need to change the filterList!!! another useEffect? set up for onClick
 
@@ -63,7 +73,10 @@ function EmployeeTable() {
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th
+                        onClick={handleSortChange}
+                        >
+                            Email</th>
                         <th>Phone</th>
                         <th>Cell</th>
                     </tr>
