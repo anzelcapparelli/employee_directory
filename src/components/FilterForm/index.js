@@ -10,7 +10,7 @@ function FilterForm(props) {
             onChange={props.handleInputChange}
             name="term"
             type="text"
-            className="form-control"
+            className="form-control mb-3"
             placeholder="Enter Filter"
           />
         </div>

@@ -2,9 +2,6 @@ import React, { Component, useState, useEffect } from "react";
 import API from "../utils/API";
 import FilterForm from "../FilterForm";
 
-// import API from "../utils/API"
-
-// need to get picture in too
 
 function EmployeeTable() {
 
@@ -24,29 +21,14 @@ function EmployeeTable() {
 
     useEffect(() => {
         if (!empFilter) {
-          return;
+          return setFilterList(empList);
         }
 
-        const filteredResults = empList.filter(empLeft => empLeft.name.first.indexOf(empFilter) > -1);
-        // Set this.state.friends equal to the new friends array
+        const filteredResults = empList.filter(empLeft => empLeft.name.first.toLowerCase().indexOf(empFilter.toLowerCase()) > -1);
+
         setFilterList(filteredResults);
         console.log(filterList);
 
-    //     API.searchTerms(search)
-    //       .then((res) => {
-    //         if (res.data.length === 0) {
-    //           throw new Error("No results found.");
-    //         }
-    //         if (res.data.status === "error") {
-    //           throw new Error(res.data.message);
-    //         }
-    //         setTitle(res.data[1]);
-    //         setUrl(res.data[3][0]);
-    //         setError("");
-    //       })
-    //       .catch((err) => setError(err.message));
-
-    //     // the effect callback will be called every time the value of search changes
       }, [empFilter]);
 
       const handleInputChange = (event) => setFilter(event.target.value);
