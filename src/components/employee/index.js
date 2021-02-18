@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import API from "../utils/API";
 import FilterForm from "../FilterForm";
 
@@ -9,7 +10,7 @@ function EmployeeTable() {
     // const [simpleList, setSimple] = useState([]);
     const [empFilter, setFilter] = useState("");
     const [filterList, setFilterList] = useState([]);
-    const [sorted, setSorted]=useState(false);
+    const [sorted, setSorted] = useState(false);
     // const [error, setError] = useState("");
 
     useEffect(() => {
@@ -35,7 +36,7 @@ function EmployeeTable() {
     }, [empFilter]);
 
     useEffect(() => {
-        
+
         const updatefilter = filterList.sort(function (a, b) {
             var x = a.email.toLowerCase();
             var y = b.email.toLowerCase();
@@ -44,40 +45,26 @@ function EmployeeTable() {
             return 0;
         });
         setFilterList(updatefilter);
-        
+
     }, [sorted]);
 
     const handleInputChange = (event) => setFilter(event.target.value);
 
     const handleSortChange = (event) => setSorted(!sorted);
-        // const updatefilter = filterList.sort(function (a, b) {
-        //     var x = a.email.toLowerCase();
-        //     var y = b.email.toLowerCase();
-        //     if (x < y) { return -1; }
-        //     if (x > y) { return 1; }
-        //     return 0;
-        // });
-        // setFilterList(updatefilter);
-        // console.log(filterList);
-    // };
-    // clicking a header needs to sort by that column
-    // need to change the filterList!!! another useEffect? set up for onClick
-
-
 
 
     return (
         <div>
 
             <FilterForm handleInputChange={handleInputChange} empFilter={empFilter} />
-
+            <p>Double-Click the email header to sort alphabetically!</p>
             <table style={{ "width": "100%" }}>
                 <thead>
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
                         <th
-                        onClick={handleSortChange}
+                            onClick={handleSortChange}
                         >
                             Email</th>
                         <th>Phone</th>
