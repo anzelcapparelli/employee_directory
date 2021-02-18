@@ -2,6 +2,8 @@ import React, { Component, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import API from "../utils/API";
 import FilterForm from "../FilterForm";
+import Navbar from "../Navbar";
+import "./style.css";
 
 
 function EmployeeTable() {
@@ -55,18 +57,15 @@ function EmployeeTable() {
 
     return (
         <div>
-
+            <Navbar></Navbar>
             <FilterForm handleInputChange={handleInputChange} empFilter={empFilter} />
-            <p>Double-Click the email header to sort alphabetically!</p>
-            <table style={{ "width": "100%" }}>
+            <p>Double-click the email header to sort alphabetically!</p>
+            <table style={{ "width": "100%", "borderCollapse": "collapse" }}>
                 <thead>
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th
-                            onClick={handleSortChange}
-                        >
-                            Email</th>
+                        <th onClick={handleSortChange}> Email </th>
                         <th>Phone</th>
                         <th>Cell</th>
                     </tr>
