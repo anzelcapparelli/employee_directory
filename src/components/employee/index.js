@@ -9,6 +9,7 @@ function EmployeeTable() {
     // const [simpleList, setSimple] = useState([]);
     const [empFilter, setFilter] = useState("");
     const [filterList, setFilterList] = useState([]);
+    const [sorted, setSorted]=useState(false);
     // const [error, setError] = useState("");
 
     useEffect(() => {
@@ -33,20 +34,8 @@ function EmployeeTable() {
 
     }, [empFilter]);
 
-    // useEffect(() => {
-    //     const updatefilter = filterList.sort(function (a, b) {
-    //         var x = a.email.toLowerCase();
-    //         var y = b.email.toLowerCase();
-    //         if (x < y) { return -1; }
-    //         if (x > y) { return 1; }
-    //         return 0;
-    //     });
-    //     setFilterList(updatefilter);
-    // }, [filterList]);
-
-    const handleInputChange = (event) => setFilter(event.target.value);
-
-    const handleSortChange = (event) => {
+    useEffect(() => {
+        
         const updatefilter = filterList.sort(function (a, b) {
             var x = a.email.toLowerCase();
             var y = b.email.toLowerCase();
@@ -55,8 +44,22 @@ function EmployeeTable() {
             return 0;
         });
         setFilterList(updatefilter);
-        console.log(filterList);
-    };
+        
+    }, [sorted]);
+
+    const handleInputChange = (event) => setFilter(event.target.value);
+
+    const handleSortChange = (event) => setSorted(!sorted);
+        // const updatefilter = filterList.sort(function (a, b) {
+        //     var x = a.email.toLowerCase();
+        //     var y = b.email.toLowerCase();
+        //     if (x < y) { return -1; }
+        //     if (x > y) { return 1; }
+        //     return 0;
+        // });
+        // setFilterList(updatefilter);
+        // console.log(filterList);
+    // };
     // clicking a header needs to sort by that column
     // need to change the filterList!!! another useEffect? set up for onClick
 
