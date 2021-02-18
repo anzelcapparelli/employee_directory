@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import API from "../utils/API";
-import FilterForm from "../filter_form";
+import FilterForm from "../FilterForm";
 
 // import API from "../utils/API"
 
@@ -10,6 +10,7 @@ function EmployeeTable() {
 
     const [empList, setList] = useState([]);
     const [empFilter, setFilter] = useState("");
+    const [filterList, setFilterList] = useState ([]);
     // const [error, setError] = useState("");
 
     useEffect(() => {
@@ -17,9 +18,36 @@ function EmployeeTable() {
             .then((res) => {
                 // console.log(res);
                 setList(res.data.results);
+                setFilterList(res.data.results);
             })
     }, []);
 
+    useEffect(() => {
+        if (!empFilter) {
+          return;
+        }
+
+        const filteredResults = empList.filter(empLeft => empLeft.name.first.indexOf(empFilter) > -1);
+        // Set this.state.friends equal to the new friends array
+        setFilterList(filteredResults);
+        console.log(filterList);
+
+    //     API.searchTerms(search)
+    //       .then((res) => {
+    //         if (res.data.length === 0) {
+    //           throw new Error("No results found.");
+    //         }
+    //         if (res.data.status === "error") {
+    //           throw new Error(res.data.message);
+    //         }
+    //         setTitle(res.data[1]);
+    //         setUrl(res.data[3][0]);
+    //         setError("");
+    //       })
+    //       .catch((err) => setError(err.message));
+
+    //     // the effect callback will be called every time the value of search changes
+      }, [empFilter]);
 
       const handleInputChange = (event) => setFilter(event.target.value);
 
@@ -39,7 +67,7 @@ function EmployeeTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {empList.map(emp =>
+                    {filterList.map(emp =>
                         <tr key={emp.email}>
                             <td>
                                 <img
