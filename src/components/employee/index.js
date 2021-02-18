@@ -9,12 +9,6 @@ function EmployeeCard() {
     const [empList, setList] = useState([]);
     // const [error, setError] = useState("");
 
-    API.search()
-        .then((res) => {
-            console.log(res);
-            setList(res.data.results);
-        })
-
     useEffect(() => {
         API.search()
             .then((res) => {
@@ -26,26 +20,30 @@ function EmployeeCard() {
 
     return (
         <table style={{ "width": "100%" }}>
-            <tr>
-                <th>Photo</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Cell</th>
-            </tr>
-
-            {/* <tr>
-                <td>
-                    <img
-                        alt="placeholder"
-                        src={empList[0].picture.thumbnail}
-                    />
-                </td>
-                <td>{empList[0].name.first} {empList[0].name.last}</td>
-                <td>{empList[0].email}</td>
-                <td>{empList[0].phone}</td>
-                <td>{empList[0].cell}</td>
-            </tr> */}
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Cell</th>
+                </tr>
+            </thead>
+            <tbody>
+                {empList.map(emp =>
+                    <tr key={emp.email}>
+                        <td>
+                            <img
+                                alt="placeholder"
+                                src={emp.picture.thumbnail}
+                            />
+                        </td>
+                        <td>{emp.name.first} {emp.name.last}</td>
+                        <td>{emp.email}</td>
+                        <td>{emp.phone}</td>
+                        <td>{emp.cell}</td>
+                    </tr>)}
+            </tbody>
         </table>
     )
 
